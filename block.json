@@ -45,6 +45,5 @@
 	"editorScript": "file:./assets/js/editor.js",
 	"editorStyle": "file:./assets/css/editor.css",
 	"style": "file:./assets/css/frontend.css",
-	"viewScript": "file:./assets/js/frontend.js",
 	"render": "file:./render.php"
 }

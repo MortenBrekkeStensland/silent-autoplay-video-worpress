@@ -3,16 +3,10 @@
 	width: 100%;
 }
 
-/* Hide video until JS confirms native autoplay works */
 .sav-video-wrapper video.sav-video {
-	display: none;
+	display: block;
 	width: 100%;
 	height: auto;
-}
-
-/* JS adds this class when native autoplay succeeds */
-.sav-video-wrapper video.sav-video.sav-native {
-	display: block;
 }
 
 .sav-video-wrapper canvas.sav-canvas {
