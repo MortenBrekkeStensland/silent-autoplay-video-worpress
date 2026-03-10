@@ -19,6 +19,8 @@
 			video.style.height = '1px';
 			video.style.opacity = '0';
 			video.style.pointerEvents = 'none';
+			// Video must be display:block for frame data even when visually hidden
+			video.style.display = 'block';
 			canvas.style.display = 'block';
 			canvasActive = true;
 			sizeCanvas();
@@ -35,10 +37,12 @@
 			video.style.height = '';
 			video.style.opacity = '';
 			video.style.pointerEvents = '';
+			video.style.display = '';
+			video.classList.add('sav-native');
 			canvas.style.display = 'none';
 		}
 
-		// Smooth canvas loop using requestAnimationFrame — requires video.play() to work
+		// Draw loop at display refresh rate (used by both tiers)
 		function drawFrameLoop() {
 			if (!canvasActive) return;
 			if (video.readyState >= 2) {
@@ -47,12 +51,12 @@
 			requestAnimationFrame(drawFrameLoop);
 		}
 
-		// Last-resort fallback: manually advance currentTime at ~30fps
+		// Last-resort: advance currentTime via setInterval, draw via requestAnimationFrame
 		function startManualAdvance() {
+			// Advance time at ~30fps
 			manualInterval = setInterval(function () {
 				if (video.readyState >= 2) {
 					video.currentTime += 1 / 30;
-					ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 					if (video.duration && video.currentTime >= video.duration) {
 						if (video.loop) {
 							video.currentTime = 0;
@@ -63,10 +67,13 @@
 					}
 				}
 			}, 1000 / 30);
+
+			// Draw at display refresh rate (separate from time advancement)
+			drawFrameLoop();
 		}
 
 		function listenForInteraction() {
-			var events = ['click', 'scroll', 'touchstart', 'keydown'];
+			var events = ['click', 'touchstart', 'keydown'];
 			events.forEach(function (evt) {
 				document.addEventListener(
 					evt,
@@ -95,7 +102,8 @@
 		if (playPromise !== undefined) {
 			playPromise
 				.then(function () {
-					// Native autoplay works — canvas stays hidden
+					// Native autoplay works — show video, canvas stays hidden
+					video.classList.add('sav-native');
 				})
 				.catch(function () {
 					// Autoplay blocked — show canvas
@@ -110,7 +118,7 @@
 							drawFrameLoop();
 						})
 						.catch(function () {
-							// Truly blocked — manually advance currentTime as last resort
+							// Truly blocked — advance time manually, draw at 60fps
 							startManualAdvance();
 						});
 
