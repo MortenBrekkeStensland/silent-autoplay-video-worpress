@@ -1,0 +1,15 @@
+.sav-editor-preview {
+	position: relative;
+}
+
+.sav-editor-preview video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.sav-editor-replace {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}

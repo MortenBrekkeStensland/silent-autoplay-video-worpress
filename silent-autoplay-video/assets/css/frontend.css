@@ -1,0 +1,16 @@
+.sav-video-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.sav-video-wrapper video.sav-video {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.sav-video-wrapper canvas.sav-canvas {
+	display: none;
+	width: 100%;
+	height: auto;
+}

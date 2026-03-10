@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "sav/silent-autoplay-video",
+	"title": "Silent Autoplay Video",
+	"category": "media",
+	"icon": "format-video",
+	"description": "A muted autoplay video with Safari canvas fallback.",
+	"keywords": [ "video", "autoplay", "muted", "silent" ],
+	"textdomain": "silent-autoplay-video",
+	"attributes": {
+		"mediaId": {
+			"type": "number",
+			"default": 0
+		},
+		"mediaUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"posterUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"posterId": {
+			"type": "number",
+			"default": 0
+		},
+		"loop": {
+			"type": "boolean",
+			"default": true
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": "100%"
+		}
+	},
+	"supports": {
+		"align": true,
+		"anchor": true,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./assets/js/editor.js",
+	"editorStyle": "file:./assets/css/editor.css",
+	"style": "file:./assets/css/frontend.css",
+	"viewScript": "file:./assets/js/frontend.js",
+	"render": "file:./render.php"
+}
