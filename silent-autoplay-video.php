@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Silent Autoplay Video
  * Description: A Gutenberg block for muted autoplay videos with Safari canvas fallback.
- * Version: 1.3
+ * Version: 1.4
  * Author: PresentationTools A/S
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -29,9 +29,7 @@ function sav_footer_script() {
 		if (window._savDone) return;
 		window._savDone = true;
 
-		window.addEventListener('load', function () {
-			var wrappers = document.querySelectorAll('.sav-video-wrapper');
-			console.log('[SAV] Wrappers found: ' + wrappers.length);
+		var wrappers = document.querySelectorAll('.sav-video-wrapper');
 
 			wrappers.forEach(function (wrapper) {
 				var video = wrapper.querySelector('video.sav-video');
@@ -123,7 +121,6 @@ function sav_footer_script() {
 					});
 				});
 			});
-		});
 	})();
 	</script>
 	<?php
